@@ -1,8 +1,4 @@
-let myAccount = {
-    name: 'Klaas',
-    expense: 0,
-    income: 0,
-}
+// FUNCTIONS
 
 let addExpense = function(account,amount) {
     account.expense += amount;
@@ -23,6 +19,13 @@ let getAccountSummary = function(account) {
     console.log(accountSummary)
 }
 
+// TESTING
+
+let myAccount = {
+    name: 'Klaas',
+    expense: 0,
+    income: 0,
+}
 addIncome(myAccount,2000)
 addExpense(myAccount,100)
 addExpense(myAccount,260)
