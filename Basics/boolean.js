@@ -1,4 +1,5 @@
-// === equality operator
+// == equal value
+// === equal value and equal type
 // !== no equal operator
 // < less than operator
 // > greater than operator
