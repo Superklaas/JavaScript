@@ -36,3 +36,5 @@ const findTasks = function(tasks,query) {
 }
 const filteredTasks = findTasks(tasks,'t')
 console.log(filteredTasks)
+
+
