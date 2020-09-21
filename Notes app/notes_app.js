@@ -1,54 +1,50 @@
-// ARRAY WITH NOTES
+let notes = []
 
-const notes = [{
-    title: 'My first trip',
-    text: 'I went to Antartica',
-},{
-    title: 'My second trip',
-    text: 'I went to Uruguay',
-},{
-    title: 'My third trip',
-    text: 'I went to the USA',
-}]
-
-// INPUT QUERY, SEARCH NOTES FOR QUERY, DISPLAY RESULTS
-
-// object containing query (entered at #search-text)
 const filters = {
     searchText: ''
 }
 
-// function to display notes matching the query
+// Check for existing saved data
+const notesJSON = localStorage.getItem('notes')
+if(notesJSON != null) {
+    notes = JSON.parse(notesJSON)
+}
+
 const renderNotes = function(notes,filters) {
-    // array with all the notes matching the query
+    // filter notes by query
     const filteredNotes = notes.filter(function(note) {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     })
-    // delete existing elements in div #notes
+    // clear displayed notes
     document.querySelector('#notes').innerHTML = ''
-    // displaying the filtered notes (cf. 'Add elements via the DOM')
+    // add notes to display
     filteredNotes.forEach(function(note) {
         const addedNote = document.createElement('p')
-        addedNote.textContent = note.title
+        if(note.title.length > 0) {
+            addedNote.textContent = note.title
+        } else {
+            addedNote.textContent = 'Unnamed note'
+        }
         document.querySelector('#notes').appendChild(addedNote)
     })
 }
 
 renderNotes(notes,filters)
 
-// get query from user input and display notes matching the query
+document.querySelector('#create-note').addEventListener('click',function (e) {
+    notes.push({
+        title: '',
+        body: '',
+    })
+    localStorage.setItem('notes',JSON.stringify(notes))
+    renderNotes(notes,filters)
+})
+
 document.querySelector('#search-text').addEventListener('input',function(e){
     filters.searchText = e.target.value
     renderNotes(notes,filters)
 })
 
-// BUTTON 'CREATE NOTE'
-document.querySelector('#create-note').addEventListener('click',function (e) {
-    console.log(e)
-    e.target.textContent= 'Button clicked'
-})
-
-// DROPDOWN 'SORT BY'
 document.querySelector('#sort-by').addEventListener('change',function (e) {
     console.log(e.target.value)
 })
@@ -78,3 +74,19 @@ ps.forEach(function(p) {
 const newParagraph = document.createElement('p')
 newParagraph.textContent = 'new element'
 document.querySelector('body').appendChild(newParagraph)*/
+
+/*
+// ARRAY WITH NOTES
+
+const notes = [{
+    title: 'My first trip',
+    text: 'I went to Antartica',
+},{
+    title: 'My second trip',
+    text: 'I went to Uruguay',
+},{
+    title: 'My third trip',
+    text: 'I went to the USA',
+}]
+
+// INPUT QUERY, SEARCH NOTES FOR QUERY, DISPLAY RESULTS*/

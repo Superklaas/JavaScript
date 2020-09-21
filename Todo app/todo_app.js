@@ -1,19 +1,13 @@
-// ARRAY WITH EXISTING TODOS
-const todos = [{
-    title: 'talk to god',
-    completed: true,
-},{
-    title: 'drink tea',
-    completed: false,
-},{
-    title: 'call jan stes',
-    completed: false,
-}]
+let todos = []
 
-// OBJECT CONTAINING QUERY TEXT
 const filters = {
     searchText: '',
     hideCompleted: false,
+}
+
+const todosJSON = localStorage.getItem('todos')
+if(todosJSON != null) {
+    todos = JSON.parse(todosJSON)
 }
 
 // FILTER TODOS ACCORDING TO QUERY, GET NUMBER OF INCOMPLETED TODOS, DISPLAY RESULTS QUERY
@@ -41,9 +35,9 @@ const renderTodos = function(todos,filters) {
 
     // DISPLAY FILTERED TODOS
     filteredTodos.forEach(function(todo){
-    const newTodo = document.createElement('p')
-    newTodo.textContent = todo.title
-    document.querySelector('#todos').appendChild(newTodo)
+        const newTodo = document.createElement('p')
+        newTodo.textContent = todo.title
+        document.querySelector('#todos').appendChild(newTodo)
     })
 }
 
@@ -63,6 +57,7 @@ document.querySelector('#new-todo').addEventListener('submit',function(e){
         title: e.target.elements.todo.value,
         completed: false
     })
+    localStorage.setItem('todos',JSON.stringify(todos))
     renderTodos(todos,filters)
     e.target.elements.todo.value = ''
 })
@@ -84,3 +79,15 @@ ps.forEach(function(p) {
     }
 })*/
 
+/*
+// ARRAY WITH EXISTING TODOS
+const todos = [{
+    title: 'talk to god',
+    completed: true,
+},{
+    title: 'drink tea',
+    completed: false,
+},{
+    title: 'call jan stes',
+    completed: false,
+}]*/
