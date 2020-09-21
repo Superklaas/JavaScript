@@ -13,17 +13,6 @@ const saveNotes = function(notes) {
     localStorage.setItem('notes',JSON.stringify(notes))
 }
 
-// generate DOM structure for a note
-const generateNoteDOM = function(note) {
-    const addedNote = document.createElement('p')
-    if(note.title.length > 0) {
-        addedNote.textContent = note.title
-    } else {
-        addedNote.textContent = 'Unnamed note'
-    }
-    return addedNote
-}
-
 // render notes
 const renderNotes = function(notes,filters) {
 
@@ -37,4 +26,25 @@ const renderNotes = function(notes,filters) {
         const addedNote = generateNoteDOM(note)
         document.querySelector('#notes').appendChild(addedNote)
     })
+}
+
+// generate DOM structure for a note
+const generateNoteDOM = function(note) {
+    const noteEl = document.createElement('div')
+    const textEl = document.createElement('span')
+    const button = document.createElement('button')
+
+    // setup the remove note button
+    button.textContent = 'x'
+    noteEl.appendChild(button)
+
+    // setup the note text
+    if(note.title.length > 0) {
+        textEl.textContent = note.title
+    } else {
+        textEl.textContent = 'Unnamed note'
+    }
+    noteEl.appendChild(textEl)
+
+    return noteEl
 }

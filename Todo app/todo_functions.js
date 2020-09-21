@@ -48,17 +48,31 @@ const getIncompleteTodos = function(filteredTodos) {
     return incompleteTodos
 }
 
-
-// generate DOM for individual todo
-const generateTodoDOM = function(todo) {
-    const newTodo = document.createElement('p')
-    newTodo.textContent = todo.title
-    return newTodo
-}
-
 // generate DOM for list summary
 const generateSummaryDOM = function(incompleteTodos) {
     const summary = document.createElement('h2')
     summary.textContent = `You have ${incompleteTodos.length} todos left`
     return summary
+}
+
+// generate DOM for individual todo
+const generateTodoDOM = function(todo) {
+    const todoEl = document.createElement('div')
+    const checkbox = document.createElement('input')
+    const todoText = document.createElement('span')
+    const removeButton = document.createElement('button')
+
+    // setup checkbox
+    checkbox.setAttribute("type", "checkbox")
+    todoEl.appendChild(checkbox)
+
+    // setup todo text
+    todoText.textContent = todo.title
+    todoEl.appendChild(todoText)
+
+    // setup remove button
+    removeButton.textContent = 'x'
+    todoEl.appendChild(removeButton)
+
+    return todoEl
 }
