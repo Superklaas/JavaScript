@@ -19,7 +19,7 @@ let getAccountSummary = function(account) {
     console.log(accountSummary)
 }
 
-// TESTING
+// APPLICATION
 
 let myAccount = {
     name: 'Klaas',
