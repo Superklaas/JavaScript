@@ -55,6 +55,26 @@ const generateSummaryDOM = function(incompleteTodos) {
     return summary
 }
 
+// remove todo
+const removeTodo = function(id) {
+    const todoIndex = todos.findIndex(function(todo){
+        return todo.id === id
+    })
+    if (todoIndex != -1) {
+        todos.splice(todoIndex,1)
+    }
+}
+
+// toggle todo
+const toggleTodo = function(id) {
+    const todo = todos.find(function(todo){
+        return todo.id === id
+    })
+    if(todo != undefined) {
+        todo.completed = !todo.completed
+    }
+}
+
 // generate DOM for individual todo
 const generateTodoDOM = function(todo) {
     const todoEl = document.createElement('div')
@@ -64,7 +84,13 @@ const generateTodoDOM = function(todo) {
 
     // setup checkbox
     checkbox.setAttribute("type", "checkbox")
+    checkbox.checked = todo.completed
     todoEl.appendChild(checkbox)
+    checkbox.addEventListener('click',function(){
+        toggleTodo(todo.id)
+        saveTodos(todos)
+        renderTodos(todos,filters)
+    })
 
     // setup todo text
     todoText.textContent = todo.title
@@ -73,6 +99,11 @@ const generateTodoDOM = function(todo) {
     // setup remove button
     removeButton.textContent = 'x'
     todoEl.appendChild(removeButton)
+    removeButton.addEventListener('click',function(){
+        removeTodo(todo.id)
+        saveTodos(todos)
+        renderTodos(todos,filters)
+    })
 
     return todoEl
 }
